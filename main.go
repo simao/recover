@@ -52,7 +52,9 @@ type responseWriter struct {
 }
 
 func (rw *responseWriter) Write(b []byte) (int, error) {
-	rw.writes = append(rw.writes, b)
+	buf := make([]byte, len(b))
+	copy(buf, b)
+	rw.writes = append(rw.writes, buf)
 	return len(b), nil
 }
 
